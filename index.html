@@ -1,311 +1,164 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Music Library — Demo</title>
-  <meta name="description" content="Simple music library demo (Pixabay-music like) — search, filter, preview, download."/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RA Music</title>
   <style>
-    :root{
-      --bg: #0f1724;
-      --card:#0b1220;
-      --accent:#06b6d4;
-      --muted:#9aa7b2;
-      --glass: rgba(255,255,255,0.03);
-      --radius:12px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,#071021 0%, #0b1420 60%);
-      color:#e6f0f3;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      min-height:100vh;
+    body {
+      background: linear-gradient(to right, #0061ff, #60efff);
+      color: #fff;
+      min-height: 100vh;
     }
-
-    /* Header */
-    header{
-      padding:18px 20px;
-      display:flex;
-      gap:16px;
-      align-items:center;
-      justify-content:space-between;
-      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-      position:sticky;
-      top:0;
-      z-index:30;
-      backdrop-filter: blur(6px);
+    header {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
     }
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;
-      box-shadow:0 6px 18px rgba(0,0,0,0.4);
+    header h1 {
+      font-size: 1.6rem;
     }
-    .brand h1{font-size:1.05rem;margin:0}
-    .controls{display:flex;gap:12px;align-items:center;flex:1;margin-left:18px}
-
-    /* Search */
-    .search{
-      display:flex;gap:8px;align-items:center;background:var(--glass);padding:8px;border-radius:12px;flex:1;max-width:720px;
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+      transition: color 0.3s;
     }
-    .search input{
-      background:transparent;border:0;outline:none;color:inherit;font-size:0.95rem;width:100%;
+    nav a:hover {
+      color: #ffea00;
     }
-    .filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:16px}
-    .chip{
-      padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);cursor:pointer;font-size:0.85rem;color:var(--muted);border:1px solid rgba(255,255,255,0.03)
+    .hero {
+      text-align: center;
+      padding: 6rem 1rem 4rem;
     }
-    .chip.active{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#001018;border:0}
-
-    /* Main area */
-    main{padding:26px 20px;max-width:1200px;margin:0 auto}
-    .hero{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
-    .hero h2{font-size:1.5rem;margin:0}
-    .hero p{color:var(--muted);margin:0;font-size:0.95rem}
-
-    /* Grid */
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:18px}
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-      border-radius:var(--radius);padding:12px;display:flex;gap:12px;align-items:center;border:1px solid rgba(255,255,255,0.03)
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
-    .thumb{width:84px;height:84px;border-radius:10px;background:#061423;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .meta{flex:1;min-width:0}
-    .meta h3{font-size:1rem;margin:0 0 6px 0}
-    .meta p{margin:0;color:var(--muted);font-size:0.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .meta .tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
-    .tag{font-size:0.75rem;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
-
-    /* actions */
-    .actions{display:flex;flex-direction:column;gap:8px;align-items:end}
-    .btn{
-      background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:inherit;font-size:0.9rem;cursor:pointer;
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
     }
-    .btn.play{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#001018;border:0}
-    .small{font-size:0.82rem;color:var(--muted);text-align:right}
-
-    /* footer / loader */
-    .more{display:flex;justify-content:center;margin-top:18px}
-    .empty{padding:40px;text-align:center;color:var(--muted)}
-
-    /* responsive */
-    @media(max-width:720px){
-      header{flex-wrap:wrap;gap:10px}
-      .controls{margin-left:0}
-      .actions{align-items:flex-start}
-      .meta h3{font-size:0.98rem}
-      .thumb{width:74px;height:74px}
+    .btn {
+      background: #ffea00;
+      color: #000;
+      padding: 0.7rem 1.4rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.3s;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+    }
+    section {
+      padding: 3rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px);
+    }
+    footer {
+      background: rgba(0, 0, 0, 0.3);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="brand">
-      <div class="logo">M</div>
-      <div>
-        <h1>Music Library</h1>
-        <div style="font-size:0.82rem;color:var(--muted)">Preview • Filter • Download</div>
-      </div>
-    </div>
-
-    <div class="controls" style="margin-left:auto">
-      <div class="search" role="search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M21 21l-4.35-4.35" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <input id="q" placeholder="Search by title or artist..." autocomplete="off">
-        <button id="clear" class="chip" title="Clear">Clear</button>
-      </div>
-
-      <div class="filters" id="filters" style="margin-left:12px">
-        <!-- chips will be injected -->
-      </div>
-    </div>
+    <h1>RA MUSIC</h1>
+    <nav>
+      <a href="#about">About our channel </a>
+      <a href="#projects">Work</a>
+      <a href="#contact">Contract</a>
+    </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <h2>Explore free music</h2>
-      <p>Search tracks, preview audio, filter by mood/genre and download. (Demo — replace audio/image URLs with real files.)</p>
-    </section>
+  <section class="hero">
+    <h2>Welcome to RA Music </h2>
+    <p>www.youtube.com/@rafahimn</p>
+    <a class="btn" href="#projects">Our channel </a>
+  </section>
 
-    <section>
-      <div id="grid" class="grid" aria-live="polite">
-        <!-- cards injected here -->
+  <section id="about">
+    <h2 style="text-align:center;margin-bottom:1rem;">About my channel </h2>
+    <p style="text-align:center;max-width:700px;margin:auto;">
+      Hello Everyone! 
+Wellcome to 
+
+"RA MUSIC★"
+
+✨ Hare You will Find ;-
+Songs Update News
+Coming Soon Song
+
+☆সবার প্রতি রইলো অসংখ্য ভালোবাসা । চ্যানেলটি সাবস্ক্রাইব করে আমাদের পাশেই থাকবেন। ♡
+
+Contract:-
+Instagram:rafahimn
+TikTok        :rafahimn
+Facebook :rafahim Gmail         :rabbiahmedfahim44@gmail.com
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2 style="text-align:center;margin-bottom:1rem;">Our video</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Video 1</h3>
+        <p>https://youtu.be/tr-FkYSZ3II?si=xu0GyUjXTZJmGwFL</p>
       </div>
-
-      <div id="empty" class="empty" style="display:none">কোনো ট্র্যাক মেলে নি — অন্য শব্দ/ফিল্টার ট্রাই করো।</div>
-
-      <div class="more">
-        <button id="loadMore" class="btn" style="padding:10px 16px">Load more</button>
+      <div class="card">
+        <h3>Video 2</h3>
+        <p>https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991</p>
       </div>
-    </section>
-  </main>
+      <div class="card">
+        <h3>Video 3</h3>
+        <p>https://youtube.com/shorts/_qv4SEzIJkg?si=ZZF5Ih_Kjw9dYezW</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- shared audio player (hidden) -->
-  <audio id="player"></audio>
+  <section id="contact">
+    <h2 style="text-align:center;margin-bottom:1rem;">Contract me</h2>
+    <p style="text-align:center;">Email: <a href="mailto:rabbiahmedfahim44@gmail.com" style="color:#ffea00;">rabbiahmedfahim44@gmail.com/a></p>
+  </section>
 
-  <script>
-    // Sample data array — প্রতিটিতে image এবং audio URL দিবে তুমি
-    const TRACKS = [
-      { id:1, title:"Peaceful Morning", artist:"A. Composer", tags:["ambient","calm"], duration:"2:34", image:"https://picsum.photos/seed/p1/600/600", audio:"https://cdn.pixabay.com/download/audio/2022/03/15/audio_sample_1.mp3" },
-      { id:2, title:"Energetic Beat", artist:"DJ Pulse", tags:["electronic","upbeat"], duration:"3:10", image:"https://picsum.photos/seed/p2/600/600", audio:"https://cdn.pixabay.com/download/audio/2022/03/16/audio_sample_2.mp3" },
-      { id:3, title:"Gentle Piano", artist:"L. Keys", tags:["classical","calm"], duration:"1:58", image:"https://picsum.photos/seed/p3/600/600", audio:"https://cdn.pixabay.com/download/audio/2022/03/17/audio_sample_3.mp3" },
-      { id:4, title:"Driving Synth", artist:"Neon", tags:["electronic","dark"], duration:"4:02", image:"https://picsum.photos/seed/p4/600/600", audio:"https://cdn.pixabay.com/download/audio/2022/03/18/audio_sample_4.mp3" },
-      { id:5, title:"Birds & Light", artist:"Nature Loop", tags:["ambient","nature"], duration:"2:20", image:"https://picsum.photos/seed/p5/600/600", audio:"https://cdn.pixabay.com/download/audio/2022/03/19/audio_sample_5.mp3" },
-      { id:6, title:"Upbeat Indie", artist:"The Sunrises", tags:["indie","upbeat"], duration:"3:45", image:"https://picsum.photos/seed/p6/600/600", audio:"https://cdn.pixabay.com/download/audio/2022/03/20/audio_sample_6.mp3" },
-      // add more items as you like
-    ];
+  <footer>
+    © 2025 | Developed by RA Fahim
+  </footer>
 
-    // state
-    let activeFilters = new Set();
-    let shown = 4; // how many cards to show initially
-    const perPageIncrement = 4;
-
-    const grid = document.getElementById('grid');
-    const qInput = document.getElementById('q');
-    const clearBtn = document.getElementById('clear');
-    const filtersWrap = document.getElementById('filters');
-    const emptyBox = document.getElementById('empty');
-    const loadMoreBtn = document.getElementById('loadMore');
-    const player = document.getElementById('player');
-
-    // collect unique tags
-    const ALL_TAGS = Array.from(new Set(TRACKS.flatMap(t=>t.tags))).sort();
-
-    // render chips
-    function renderChips(){
-      filtersWrap.innerHTML = '';
-      const allChip = document.createElement('div');
-      allChip.className = 'chip' + (activeFilters.size===0? ' active':'');
-      allChip.innerText = 'All';
-      allChip.onclick = ()=>{ activeFilters.clear(); render(); renderChips(); }
-      filtersWrap.appendChild(allChip);
-
-      ALL_TAGS.forEach(tag=>{
-        const d = document.createElement('div');
-        d.className = 'chip' + (activeFilters.has(tag)? ' active':'' );
-        d.innerText = tag;
-        d.onclick = ()=>{
-          if(activeFilters.has(tag)) activeFilters.delete(tag);
-          else activeFilters.add(tag);
-          render();
-          renderChips();
-        };
-        filtersWrap.appendChild(d);
-      });
-    }
-
-    // render grid based on search/filter
-    function render(){
-      const q = qInput.value.trim().toLowerCase();
-      // filter by tags and query
-      let results = TRACKS.filter(t=>{
-        const matchesQ = q=== '' || t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q);
-        const matchesTags = activeFilters.size===0 || t.tags.some(tag=>activeFilters.has(tag));
-        return matchesQ && matchesTags;
-      });
-
-      emptyBox.style.display = results.length===0 ? 'block' : 'none';
-
-      grid.innerHTML = '';
-      const toShow = results.slice(0, shown);
-      toShow.forEach(t => {
-        const card = document.createElement('article');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="thumb"><img src="${t.image}" alt="${escapeHtml(t.title)}"></div>
-          <div class="meta">
-            <h3>${escapeHtml(t.title)}</h3>
-            <p>${escapeHtml(t.artist)} • <span style="color:var(--muted)">${t.duration}</span></p>
-            <div class="tags">${t.tags.map(x=><span class="tag">${x}</span>).join('')}</div>
-          </div>
-          <div class="actions">
-            <div class="small" title="ID">${t.id}</div>
-            <div style="display:flex;gap:8px">
-              <button class="btn play" data-src="${t.audio}">Play</button>
-              <a class="btn" href="${t.audio}" download="${sanitizeFilename(t.title)}.mp3">Download</a>
-            </div>
-          </div>
-        `;
-        // attach event listeners
-        const playBtn = card.querySelector('.play');
-        playBtn.addEventListener('click', ()=>handlePlay(playBtn, t));
-        grid.appendChild(card);
-      });
-
-      // if more to load, show button
-      loadMoreBtn.style.display = results.length > shown ? 'inline-block' : 'none';
-    }
-
-    function handlePlay(btn, track){
-      const src = btn.getAttribute('data-src');
-      if(player.src !== src){
-        player.src = src;
-        player.currentTime = 0;
-      }
-      if(player.paused || player.src !== src){
-        player.play().catch(err=>console.warn('play prevented',err));
-        markPlaying(btn);
-      } else {
-        player.pause();
-        unmarkAll();
-      }
-    }
-
-    function markPlaying(btn){
-      unmarkAll();
-      btn.classList.add('playing');
-      btn.innerText = 'Pause';
-      btn.classList.add('play');
-    }
-    function unmarkAll(){
-      document.querySelectorAll('.play').forEach(b=>{
-        b.classList.remove('playing');
-        b.innerText = 'Play';
-      });
-    }
-    player.addEventListener('ended', ()=>{ unmarkAll(); });
-
-    // utility
-    function escapeHtml(s){ return (s+'').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
-    function sanitizeFilename(s){ return (s+'').replace(/[^a-z0-9_\- ]/ig,'').replace(/\s+/g,'_'); }
-
-    // events
-    qInput.addEventListener('input', ()=>{ shown = 8; render(); });
-    clearBtn.addEventListener('click', ()=>{ qInput.value=''; render(); });
-
-    loadMoreBtn.addEventListener('click', ()=>{
-      shown += perPageIncrement;
-      render();
-    });
-
-    // init
-    renderChips();
-    render();
-
-    // allow clicking Enter on focused search to focus first result play (optional)
-    qInput.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter'){
-        const firstPlay = document.querySelector('.card .play');
-        if(firstPlay) firstPlay.click();
-      }
-    });
-
-    // accessibility: keyboard play/pause support
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === ' ' || e.code === 'Space'){
-        // prevent page scroll when focused on body
-        if(document.activeElement === document.body){
-          e.preventDefault();
-          if(player.paused) player.play().catch(()=>{});
-          else player.pause();
-          unmarkAll();
-        }
-      }
-    });
-  </script>
 </body>
 </html>
