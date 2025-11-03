@@ -5,139 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RA MUSIC ★</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background: linear-gradient(to right, #0061ff, #60efff);
-      color: #fff;
-      min-height: 100vh;
-    }
-    header {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(10px);
-    }
-    header h1 a {
-      color: #fff;
-      text-decoration: none;
-    }
-    header h1 a:hover {
-      text-decoration: underline;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 1rem;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #ffea00;
-    }
-    .hero {
-      text-align: center;
-      padding: 6rem 1rem 4rem;
-    }
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      line-height: 1.6;
-    }
-    .btn {
-      background: #ffea00;
-      color: #000;
-      padding: 0.7rem 1.4rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform 0.3s;
-    }
-    .btn:hover {
-      transform: scale(1.1);
-    }
-    section {
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: 0.3s;
-    }
-    .card:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-5px);
-    }
-    footer {
-      background: rgba(0, 0, 0, 0.3);
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 0.9rem;
-      margin-top: 2rem;
-    }
-    a {
-      color: #ffea00;
-    }
-    a:visited {
-      color: #ffea00;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body { background: linear-gradient(to right, #0061ff, #60efff); color:#fff; min-height:100vh; }
+    header { background: rgba(0,0,0,0.2); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; backdrop-filter: blur(10px); }
+    header h1 a { color:#fff; text-decoration:none; }
+    header h1 a:hover { text-decoration:underline; }
+    nav a { color:#fff; margin:0 1rem; text-decoration:none; font-weight:500; }
+    nav a:hover { color:#ffea00; }
+    .hero { text-align:center; padding:6rem 1rem 4rem; }
+    .hero h2 { font-size:2.5rem; margin-bottom:1rem; }
+    .hero p { font-size:1.1rem; max-width:600px; margin:0 auto 2rem; line-height:1.6; }
+    .btn { background:#ffea00; color:#000; padding:0.7rem 1.4rem; border-radius:30px; text-decoration:none; font-weight:bold; transition:transform 0.3s; }
+    .btn:hover { transform:scale(1.1); }
+    section { padding:3rem 1rem; max-width:1000px; margin:auto; }
+    .card-container { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:1.5rem; }
+    .card { background: rgba(255,255,255,0.1); border-radius:15px; padding:1.5rem; text-align:center; transition:0.3s; }
+    .card:hover { background: rgba(255,255,255,0.2); transform: translateY(-5px); }
+    footer { background: rgba(0,0,0,0.3); text-align:center; padding:1.5rem; font-size:0.9rem; margin-top:2rem; }
+    a { color:#ffea00; }
+    a:visited { color:#ffea00; }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
-    <h1><a href="https://rafahimn.github.io/ramusic/">RA MUSIC ★</a></h1>
+    <h1><a href="index.html">RA MUSIC ★</a></h1>
     <nav>
-      <a href="#about">About</a>
+      <a href="about.html">About</a>
       <a href="#projects">Videos</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <h2>Welcome to RA MUSIC ★</h2>
     <p>Subscribe and enjoy our latest music & remixes!</p>
-    <a class="btn" href="https://www.youtube.com/@rafahimn">Visit YouTube Channel</a>
+    <a class="btn" href="https://www.youtube.com/@rafahimn" target="_blank" rel="noopener noreferrer">Visit My YouTube Channel</a>
   </section>
 
-  <section id="about">
-    <h2 style="text-align:center;margin-bottom:1rem;">About My Channel</h2>
-    <p style="text-align:center;max-width:700px;margin:auto;">
-      Hello Everyone! Welcome to <b>RA MUSIC ★</b><br><br>
-      ✨ Here you will find:<br>
-      • Songs Update News<br>
-      • Coming Soon Songs<br><br>
-      ☆ সবার প্রতি রইলো অসংখ্য ভালোবাসা। চ্যানেলটি সাবস্ক্রাইব করে আমাদের পাশেই থাকবেন। ♡<br><br>
-      Contact:<br>
-      Instagram: <a href="https://www.instagram.com/rafahimn" target="_blank" rel="noopener noreferrer">@rafahimn</a><br>
-      TikTok: <a href="https://www.tiktok.com/@rafahimn" target="_blank" rel="noopener noreferrer">@rafahimn</a><br>
-      Facebook: <a href="https://www.facebook.com/rafahim" target="_blank" rel="noopener noreferrer">@rafahim</a><br>
-      Gmail: <a href="mailto:rabbiahmedfahim44@gmail.com">rabbiahmedfahim44@gmail.com</a>
-    </p>
-  </section>
-
+  <!-- Videos Section -->
   <section id="projects">
     <h2 style="text-align:center;margin-bottom:1rem;">Our Videos</h2>
     <div class="card-container">
@@ -156,6 +64,7 @@
     </div>
   </section>
 
+  <!-- Contact Section -->
   <section id="contact">
     <h2 style="text-align:center;margin-bottom:1rem;">Contact Me</h2>
     <p style="text-align:center;">Email: <a href="mailto:rabbiahmedfahim44@gmail.com">rabbiahmedfahim44@gmail.com</a></p>
