@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instagram | RA MUSIC ★</title>
+<title>RA MUSIC ★</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
   body { background: linear-gradient(to right, #0061ff, #60efff); color:#fff; min-height:100vh; }
@@ -11,10 +11,15 @@
   header h1 a { color:#fff; text-decoration:none; }
   nav a { color:#fff; margin:0 1rem; text-decoration:none; font-weight:500; }
   nav a:hover { color:#ffea00; }
-  section { padding:3rem 1rem; max-width:1000px; margin:auto; text-align:center; }
-  .username { color:#ffea00; font-size:1.3rem; margin-top:1rem; display:inline-block; }
-  .video-section { margin-top:3rem; }
-  .video-section h2 { margin-bottom:1.5rem; }
+  .hero { text-align:center; padding:4rem 1rem 3rem; }
+  .hero h2 { font-size:2.5rem; margin-bottom:0.5rem; }
+  .hero img { width:120px; height:120px; border-radius:50%; margin-bottom:1rem; border:3px solid #ffea00; }
+  .hero p { font-size:1.1rem; max-width:600px; margin:0 auto 1.5rem; line-height:1.6; }
+  .btn { background:#ffea00; color:#000; padding:0.7rem 1.4rem; border-radius:30px; text-decoration:none; font-weight:bold; transition:transform 0.3s; }
+  .btn:hover { transform:scale(1.1); }
+  section { padding:3rem 1rem; max-width:1000px; margin:auto; }
+  .video-section { margin-bottom:3rem; }
+  .video-section h2 { text-align:center; margin-bottom:1.5rem; }
   .video-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:1.5rem; }
   .video-card { background: rgba(255,255,255,0.1); border-radius:15px; padding:1rem; text-align:center; transition:0.3s; }
   .video-card:hover { background: rgba(255,255,255,0.2); transform: translateY(-5px); }
@@ -29,31 +34,53 @@
 <header>
   <h1><a href="index.html">RA MUSIC ★</a></h1>
   <nav>
-    <a href="index.html">Home</a>
     <a href="about.html">About</a>
+    <a href="#long-videos">Long Videos</a>
+    <a href="#shorts">Shorts</a>
     <a href="contact.html">Contact</a>
+    <a href="instagram.html">Instagram</a>
   </nav>
 </header>
 
-<!-- Instagram Info -->
-<section>
-  <h2>Follow me on Instagram</h2>
-  <p class="username"><a href="https://www.instagram.com/rafahimn" target="_blank">@rafahimn</a></p>
+<!-- Hero Section -->
+<section class="hero">
+  <img src="https://yt3.ggpht.com/ytc/AAUvwniYourChannelLogoHere=s176-c-k-c0x00ffffff-no-rj" alt="RA MUSIC Logo">
+  <h2>Welcome to RA MUSIC ★</h2>
+  <p>Subscribe to my channel and enjoy the latest songs, remixes & shorts!</p>
+  <a class="btn" href="https://youtube.com/@rafahimn?si=sS8mFOkLSWNocQqb" target="_blank" rel="noopener noreferrer">Visit My YouTube Channel</a>
 </section>
 
-<!-- Instagram Video Section -->
-<section class="video-section">
-  <h2>Instagram Videos / Shorts</h2>
+<!-- Long Videos Section -->
+<section id="long-videos" class="video-section">
+  <h2>Long Videos</h2>
   <div class="video-grid">
     <div class="video-card">
       <h3>Video 1</h3>
-      <p><a href="https://www.instagram.com/p/DMfs-crPE8n/">আমার পরম সৌভাগ্য যে তুমি আমার প্রেমে পড়েছিলে😅🌸🖤🥀</a></p>
+      <p><a href="https://youtu.be/tr-FkYSZ3II?si=xu0GyUjXTZJmGwFL" target="_blank">Ayaz Erdoğan - Hep Mi Ben? (Remix)</a></p>
     </div>
     <div class="video-card">
       <h3>Video 2</h3>
-      <p><a href="https://www.instagram.com/p/DNuI_mnZmVj/">bol kaffara song✨🎧 | status video | whatsapp status | lyrics status | aesthetic</a></p>
+      <p><a href="https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991" target="_blank">Mann Mera - Lofi (Slowed + Reverb)</a></p>
     </div>
-  
+    <div class="video-card">
+      <h3>Video 3</h3>
+      <p><a href="https://youtube.com/shorts/_qv4SEzIJkg?si=ZZF5Ih_Kjw9dYezW" target="_blank">আমার পরম সৌভাগ্য যে তুমি আমার প্রেমে পড়েছিলে</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- Shorts Section -->
+<section id="shorts" class="video-section">
+  <h2>Shorts</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <h3>Short 1</h3>
+      <p><a href="https://youtube.com/shorts/_qv4SEzIJkg?si=ZZF5Ih_Kjw9dYezW" target="_blank">আমার প্রথম Instagram ভিডিও</a></p>
+    </div>
+    <div class="video-card">
+      <h3>Short 2</h3>
+      <p><a href="https://youtube.com/shorts/another-short-link" target="_blank">Instagram ভিডিও নমুনা ২</a></p>
+    </div>
   </div>
 </section>
 
