@@ -24,7 +24,7 @@
 
   header {  
     background: rgba(0,0,0,0.25);
-    padding: 1rem 2rem;
+    padding: 0.8rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,26 +33,26 @@
     backdrop-filter: blur(10px);
     z-index: 1000;
     flex-wrap: wrap;
-    gap: 0.5rem;
   }
 
-  header h1 { font-weight:bold; font-size:1.5rem; }
+  header h1 { font-weight:bold; font-size:1.4rem; }
   header h1 a { color:#fff; text-decoration:none; }
 
   /* Search bar */
   .search-container {
-    flex:1;
-    display:flex;
-    justify-content:flex-end;
-    position:relative;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
   }
 
   .search-container input {
-    padding:0.5rem 1rem;
+    padding:0.4rem 1rem;
     border-radius:25px;
     border:none;
     outline:none;
-    max-width:250px;
+    max-width:220px;
+    font-size:0.9rem;
   }
 
   #searchResults {
@@ -71,22 +71,31 @@
   #searchResults a { color:#00ffe0; text-decoration:none; }
   #searchResults a:hover { color:#ffea00; }
 
-  nav { display:flex; gap:1rem; transition:right 0.4s ease; flex-wrap: wrap; }
+  nav {
+    display: flex;
+    gap: 1rem;
+    transition: right 0.4s ease;
+  }
   nav a { color:#fff; text-decoration:none; font-weight:500; position:relative; }
   nav a::after { content:""; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:#ffea00; transition:0.3s; }
   nav a:hover::after { width:100%; }
   nav a:hover { color:#ffea00; }
 
   /* Hamburger */
-  .menu-toggle { display:none; flex-direction:column; cursor:pointer; z-index:1100; }
+  .menu-toggle {
+    display:none;
+    flex-direction:column;
+    cursor:pointer;
+    z-index:1100;
+  }
   .menu-toggle div { width:25px; height:3px; background:#fff; margin:4px; transition:0.3s; }
   .menu-toggle.active div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
   .menu-toggle.active div:nth-child(2) { opacity:0; }
   .menu-toggle.active div:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
 
   .hero { text-align:center; padding:4rem 1rem 3rem; }
-  .hero h2 { font-size:2.5rem; margin-bottom:0.5rem; }
-  .hero img { width:120px; height:120px; border-radius:50%; margin-bottom:1rem; border:3px solid #ffea00; }
+  .hero h2 { font-size:2.2rem; margin-bottom:0.5rem; }
+  .hero img { width:110px; height:110px; border-radius:50%; margin-bottom:1rem; border:3px solid #ffea00; }
   .hero p { font-size:1.1rem; max-width:600px; margin:0 auto 1.5rem; line-height:1.6; }
   .btn { background:#ffea00; color:#000; padding:0.7rem 1.4rem; border-radius:30px; text-decoration:none; font-weight:bold; transition:transform 0.3s, box-shadow 0.3s; }
   .btn:hover { transform:scale(1.1); box-shadow:0 0 10px #ffea00; }
@@ -103,7 +112,7 @@
   footer { background:rgba(0,0,0,0.3); text-align:center; padding:1.5rem; font-size:0.9rem; margin-top:2rem; }
   footer a { color:#ffea00; text-decoration:none; }
 
-  /* Mobile adjustments */
+  /* ✅ Mobile adjustments */
   @media(max-width:768px){
     nav {
       position:fixed;
@@ -113,15 +122,14 @@
       flex-direction:column;
       justify-content:center;
       align-items:center;
-      gap:1rem;
-      visibility:hidden;
+      gap:1.2rem;
+      font-size:1rem;
     }
-    nav.active { right:0; visibility:visible; }
-    nav a { font-size: 0.9rem; padding: 0.3rem 0; }
+    nav.active { right:0; }
     .menu-toggle { display:flex; }
     .search-container { width:100%; justify-content:center; margin-top:0.5rem; }
-    .search-container input { max-width:90%; font-size:0.9rem; }
-    #searchResults { width:90%; top:calc(100% + 5px); right:5%; }
+    .search-container input { max-width:85%; font-size:0.85rem; }
+    #searchResults { width:85%; top:calc(100% + 5px); right:7%; }
   }
 </style>
 </head>
@@ -131,7 +139,7 @@
   <h1><a href="index.html">RA MUSIC ★</a></h1>
 
   <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search videos, shorts, gallery...">
+    <input type="text" id="searchInput" placeholder="Search...">
     <div id="searchResults"></div>
   </div>
 
@@ -140,11 +148,11 @@
   </div>
 
   <nav id="menu">
-    <a href="about.html">About</a>
-    <a href="image.html">Gallery</a>
-    <a href="contact.html">Contact</a>
-    <a href="instagram.html">Instagram</a>
-    <a href="#" onclick="shareSite(); toggleMenu();">Share</a>
+    <a href="about.html" onclick="toggleMenu()">About</a>
+    <a href="image.html" onclick="toggleMenu()">Gallery</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+    <a href="instagram.html" onclick="toggleMenu()">Instagram</a>
+    <a href="https://facebook.com/rafahimn" target="_blank" onclick="toggleMenu()">Facebook</a>
   </nav>
 </header>
 
@@ -152,75 +160,25 @@
   <img src="1755759759464.jpg" alt="RA MUSIC Logo">
   <h2>Welcome to RA MUSIC ★</h2>
   <p>Subscribe to our channel and enjoy the latest songs, remixes & shorts!</p>
-  <a class="btn" href="https://youtube.com/@rafahimn?si=sS8mFOkLSWNocQqb" target="_blank">Visit Our YouTube Channel</a>
-</section>
-
-<section id="long-videos" class="video-section">
-  <h2>Long Videos</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <h3>Video 1</h3>
-      <p><a href="https://youtu.be/tr-FkYSZ3II?si=xu0GyUjXTZJmGwFL" target="_blank">Ayaz Erdoğan - Hep Mi Ben? (Remix)</a></p>
-    </div>
-    <div class="video-card">
-      <h3>Video 2</h3>
-      <p><a href="https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991" target="_blank">Mann Mera - Lofi (Slowed + Reverb)</a></p>
-    </div>
-  </div>
-</section>
-
-<section id="shorts" class="video-section">
-  <h2>Shorts</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <h3>Short 1</h3>
-      <p><a href="https://www.youtube.com/shorts/Rr9HxX6MxsQ" target="_blank">প্রতিটি মেয়েই নিষ্ঠুর হওয়ার অসীম ক্ষমতা নিয়ে জন্মায় 😅🖤🥀</a></p>
-    </div>
-    <div class="video-card">
-      <h3>Short 2</h3>
-      <p><a href="https://youtube.com/shorts/CCPAn6TliKs" target="_blank">She is looking so beautiful ❤️‍🩹But she come not for me 😥</a></p>
-    </div>
-  </div>
+  <a class="btn" href="https://youtube.com/@rafahimn" target="_blank">Visit YouTube Channel</a>
 </section>
 
 <footer>
-  © 2025 | Developed by <a href="https://www.facebook.com/rafahimn" target="_blank">RA Fahim</a>
+  © 2025 | Developed by <a href="https://facebook.com/rafahimn" target="_blank">RA Fahim</a>
 </footer>
 
 <script>
 function toggleMenu() {
-  const menu = document.getElementById("menu");
-  const toggle = document.querySelector(".menu-toggle");
-  menu.classList.toggle("active");
-  toggle.classList.toggle("active");
+  document.getElementById("menu").classList.toggle("active");
+  document.querySelector(".menu-toggle").classList.toggle("active");
 }
 
-// Share function
-function shareSite() {
-  if (navigator.share) {
-    navigator.share({
-      title: 'RA MUSIC ★',
-      text: 'Check out RA MUSIC ★ website!',
-      url: window.location.href
-    });
-  } else {
-    navigator.clipboard.writeText(window.location.href)
-      .then(() => alert('Link copied to clipboard!'));
-  }
-}
-
-// Search Data
+// Search
 const data = [
-  { type: 'Video', title: 'Ayaz Erdoğan - Hep Mi Ben? (Remix)', link: 'https://youtu.be/tr-FkYSZ3II?si=xu0GyUjXTZJmGwFL' },
-  { type: 'Video', title: 'Mann Mera - Lofi (Slowed + Reverb)', link: 'https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991' },
-  { type: 'Short', title: 'প্রতিটি মেয়েই নিষ্ঠুর হওয়ার অসীম ক্ষমতা নিয়ে জন্মায় 😅🖤🥀', link: 'https://www.youtube.com/shorts/Rr9HxX6MxsQ' },
-  { type: 'Short', title: 'She is looking so beautiful ❤️‍🩹But she come not for me 😥', link: 'https://youtube.com/shorts/CCPAn6TliKs' },
-  { type: 'Gallery', title: '2025-11-04 | Our logo', link: 'image.html#img1' },
-  { type: 'Gallery', title: '2025-11-04 | Our Banner', link: 'image.html#img2' },
-  { type: 'Gallery', title: '2025-09-15 | YT Analysis', link: 'image.html#img3' },
-  { type: 'Gallery', title: '2025-09-15 | Subscriber Milestone', link: 'image.html#img4' },
-  { type: 'Gallery', title: '2025-09-15 | Views Milestone', link: 'image.html#img5' },
   { type: 'Facebook', title: 'RA Fahim Facebook Page', link: 'https://www.facebook.com/rafahimn' },
+  { type: 'Video', title: 'Ayaz Erdoğan - Hep Mi Ben? (Remix)', link: 'https://youtu.be/tr-FkYSZ3II' },
+  { type: 'Short', title: 'She is looking so beautiful ❤️‍🩹', link: 'https://youtube.com/shorts/CCPAn6TliKs' },
+  { type: 'Gallery', title: 'Our Logo', link: 'image.html#img1' },
 ];
 
 const input = document.getElementById('searchInput');
@@ -244,6 +202,5 @@ input.addEventListener('input', function() {
   });
 });
 </script>
-
 </body>
 </html>
