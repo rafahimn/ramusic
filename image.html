@@ -1,13 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | RA MUSIC ★</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+
+  body {
+    background: linear-gradient(-45deg, #6a11cb, #2575fc, #21d4fd, #b721ff);
+    background-size: 400% 400%;
+    animation: softGradient 25s ease infinite;
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  @keyframes softGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  header {
+    background: rgba(0,0,0,0.25);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+  }
+  header h1 a { color:#fff; text-decoration:none; font-weight:bold; }
+  nav { display:flex; gap:1rem; }
+  nav a { color:#fff; text-decoration:none; font-weight:500; position:relative; }
+  nav a::after { content:""; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:#ffea00; transition:0.3s; }
+  nav a:hover::after { width:100%; } nav a:hover { color:#ffea00; }
+
+  /* Hamburger */
+  .menu-toggle { display:none; flex-direction:column; cursor:pointer; z-index:1100; }
+  .menu-toggle div { width:25px; height:3px; background:#fff; margin:4px; transition:0.3s; }
+  .menu-toggle.active div:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+  .menu-toggle.active div:nth-child(2) { opacity:0; }
+  .menu-toggle.active div:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
+  @media (max-width:768px){
+    nav { position:fixed; top:0; right:-100%; width:70%; height:100vh; background:rgba(0,0,0,0.9); flex-direction:column; justify-content:center; align-items:center; gap:2rem; }
+    nav.active { right:0; }
+    .menu-toggle { display:flex; }
+  }
+
+  section { padding:3rem 1rem; max-width:1200px; margin:auto; }
+  section h2 { text-align:center; margin-bottom:2rem; }
+
+  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; }
+  .gallery-card { border-radius:15px; overflow:hidden; cursor:pointer; position:relative; transition:0.3s; }
+  .gallery-card img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.3s; }
+  .gallery-card:hover img { transform: scale(1.05); }
+
+  .gallery-caption {
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background: rgba(0,0,0,0.5);
+    padding: 0.5rem;
+    font-size:0.85rem;
+    text-align:center;
+    color:#ffea00;
+  }
+
+  /* Fullscreen view */
+  .lightbox {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.95);
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+    flex-direction:column;
+    padding:1rem;
+  }
+  .lightbox img { max-width:90%; max-height:70%; border-radius:10px; }
+  .lightbox .caption { color:#ffea00; margin-top:1rem; text-align:center; font-size:1rem; }
+  .lightbox .close { position:absolute; top:20px; right:30px; font-size:2rem; color:#fff; cursor:pointer; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html">RA MUSIC ★</a></h1>
+  <div class="menu-toggle" onclick="toggleMenu()"><div></div><div></div><div></div></div>
+  <nav id="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="image.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <a href="instagram.html">Instagram</a>
+  </nav>
+</header>
+
 <section>
   <h2>Gallery</h2>
   <div class="gallery-grid">
-    <div class="gallery-card" data-type="image" data-caption="Beautiful Sunset" data-date="2025-11-04">
+    <div class="gallery-card" data-caption="Beautiful Sunset" data-date="2025-11-04">
       <img src="1755759759464.jpg" alt="Gallery Image 1">
-      <div class="gallery-caption">2025-11-04 | Beautiful Sunset</div>
+      <div class="gallery-caption">2025-11-04 | Our logo</div>
     </div>
-    <div class="gallery-card" data-type="video" data-caption="Sample Video" data-date="2025-10-20">
-      <video src="videos/video1.mp4" muted></video>
-      <div class="gallery-caption">2025-10-20 | Sample Video</div>
+    <div class="gallery-card" data-caption="Relaxing Beach" data-date="2025-10-20">
+      <img src="images/img2.jpg" alt="Gallery Image 2">
+      <div class="gallery-caption">2025-10-20 | Relaxing Beach</div>
+    </div>
+    <div class="gallery-card" data-caption="Night City Lights" data-date="2025-09-15">
+      <img src="images/img3.jpg" alt="Gallery Image 3">
+      <div class="gallery-caption">2025-09-15 | Night City Lights</div>
     </div>
   </div>
 </section>
@@ -15,57 +125,37 @@
 <!-- Fullscreen Lightbox -->
 <div class="lightbox" id="lightbox">
   <span class="close" onclick="closeLightbox()">&times;</span>
-  <div id="lightbox-media-container"></div>
+  <img id="lightbox-img" src="" alt="">
+  <div class="caption" id="lightbox-caption"></div>
 </div>
 
-<style>
-.lightbox {
-  display: none;
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.95);
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  flex-direction: column;
-  padding: 1rem;
-}
-.lightbox img, .lightbox video {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 10px;
-}
-</style>
-
 <script>
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("active");
+  document.querySelector(".menu-toggle").classList.toggle("active");
+}
+
+// Open lightbox
 const galleryCards = document.querySelectorAll('.gallery-card');
 const lightbox = document.getElementById('lightbox');
-const lightboxMediaContainer = document.getElementById('lightbox-media-container');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
 
 galleryCards.forEach(card => {
   card.addEventListener('click', () => {
-    const type = card.dataset.type;
-    lightboxMediaContainer.innerHTML = ''; // Clear previous media
-    
-    if(type === 'image') {
-      const img = document.createElement('img');
-      img.src = card.querySelector('img').src;
-      lightboxMediaContainer.appendChild(img);
-    } else if(type === 'video') {
-      const video = document.createElement('video');
-      video.src = card.querySelector('video').src;
-      video.controls = true;
-      video.autoplay = true;
-      lightboxMediaContainer.appendChild(video);
-    }
-
+    const imgSrc = card.querySelector('img').src;
+    const caption = card.dataset.caption;
+    const date = card.dataset.date;
+    lightboxImg.src = imgSrc;
+    lightboxCaption.textContent = `${date} | ${caption}`;
     lightbox.style.display = 'flex';
   });
 });
 
 function closeLightbox() {
   lightbox.style.display = 'none';
-  lightboxMediaContainer.innerHTML = ''; // Stop video if playing
 }
 </script>
+
+</body>
+</html>
