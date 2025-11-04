@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -14,13 +16,6 @@
     color: #fff;
     min-height: 100vh;
     overflow-x: hidden;
-    transition: filter 0.3s ease;
-  }
-
-  body.menu-open {
-    overflow: hidden;       /* scroll & slide বন্ধ */
-    position: fixed;
-    width: 100%;
   }
 
   @keyframes softGradient {
@@ -122,7 +117,6 @@
       align-items:center;
       gap:1rem;
       visibility:hidden;
-      transition:right 0.3s ease-in-out, visibility 0.3s;
     }
     nav.active { right:0; visibility:visible; }
     nav a { font-size: 0.9rem; padding: 0.3rem 0; }
@@ -199,16 +193,8 @@
 function toggleMenu() {
   const menu = document.getElementById("menu");
   const toggle = document.querySelector(".menu-toggle");
-  const body = document.body;
-
-  const isActive = menu.classList.toggle("active");
+  menu.classList.toggle("active");
   toggle.classList.toggle("active");
-
-  if (isActive) {
-    body.classList.add("menu-open");   // body scroll বন্ধ
-  } else {
-    body.classList.remove("menu-open"); // আবার চালু
-  }
 }
 
 // Share function
