@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -116,10 +115,9 @@
       justify-content:center;
       align-items:center;
       gap:1rem;
-      visibility:hidden;
     }
-    nav.active { right:0; visibility:visible; }
     nav a { font-size: 0.9rem; padding: 0.3rem 0; }
+    nav.active { right:0; }
     .menu-toggle { display:flex; }
     .search-container { width:100%; justify-content:center; margin-top:0.5rem; }
     .search-container input { max-width:90%; font-size:0.9rem; }
@@ -191,10 +189,8 @@
 
 <script>
 function toggleMenu() {
-  const menu = document.getElementById("menu");
-  const toggle = document.querySelector(".menu-toggle");
-  menu.classList.toggle("active");
-  toggle.classList.toggle("active");
+  document.getElementById("menu").classList.toggle("active");
+  document.querySelector(".menu-toggle").classList.toggle("active");
 }
 
 // Share function
@@ -204,10 +200,12 @@ function shareSite() {
       title: 'RA MUSIC ★',
       text: 'Check out RA MUSIC ★ website!',
       url: window.location.href
-    });
+    }).then(() => console.log('Thanks for sharing!'))
+      .catch(console.error);
   } else {
     navigator.clipboard.writeText(window.location.href)
-      .then(() => alert('Link copied to clipboard!'));
+      .then(() => alert('Link copied to clipboard!'))
+      .catch(() => alert('Copy failed. Please copy manually.'));
   }
 }
 
@@ -217,6 +215,8 @@ const data = [
   { type: 'Video', title: 'Mann Mera - Lofi (Slowed + Reverb)', link: 'https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991' },
   { type: 'Short', title: 'প্রতিটি মেয়েই নিষ্ঠুর হওয়ার অসীম ক্ষমতা নিয়ে জন্মায় 😅🖤🥀', link: 'https://www.youtube.com/shorts/Rr9HxX6MxsQ' },
   { type: 'Short', title: 'She is looking so beautiful ❤️‍🩹But she come not for me 😥', link: 'https://youtube.com/shorts/CCPAn6TliKs' },
+  { type: 'Gallery', title: 'My first remix 🎧🔥', link: 'image.html#img1' },
+  { type: 'Gallery', title: 'Relaxing Lofi Beats 🎶', link: 'image.html#img2' },
   { type: 'Gallery', title: '2025-11-04 | Our logo', link: 'image.html#img1' },
   { type: 'Gallery', title: '2025-11-04 | Our Banner', link: 'image.html#img2' },
   { type: 'Gallery', title: '2025-09-15 | YT Analysis', link: 'image.html#img3' },
