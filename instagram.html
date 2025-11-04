@@ -10,25 +10,18 @@
 
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-  
-  /* Unique Animated Background */
+
+  /* Main Background (blue gradient) */
   body {
-    background: linear-gradient(135deg, #0061ff, #60efff, #ffea00);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    background: linear-gradient(to right, #0061ff, #60efff);
     color:#fff;
     min-height:100vh;
     overflow-x:hidden;
   }
-  @keyframes gradientBG {
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
 
-  /* Header */
+  /* Header with unique subtle color */
   header {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.35); /* subtle unique glassy look */
     padding:1rem 2rem;
     display:flex;
     justify-content:space-between;
@@ -99,7 +92,7 @@
   section { padding:3rem 1rem; max-width:1000px; margin:auto; text-align:center; }
   section h2 { font-size:2rem; margin-bottom:1rem; }
 
-  /* Username */
+  /* Instagram Username */
   .username { color:#ffea00; font-size:1.5rem; margin-top:1rem; display:inline-block; font-weight:bold; }
 
   /* Video Grid */
