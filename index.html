@@ -13,24 +13,22 @@
 
   /* Dynamic Gradient Background */
   body {
-    background: linear-gradient(-45deg, #0061ff, #00d4ff, #00ffe5, #60efff);
-    background-size: 800% 800%;
+    background: linear-gradient(-45deg, #1a2a6c, #b21f1f, #fdbb2d, #0061ff);
+    background-size: 400% 400%;
     animation: gradientBG 20s ease infinite;
     color: #fff;
     min-height: 100vh;
   }
 
   @keyframes gradientBG {
-    0% {background-position:0% 50%;}
-    25% {background-position:50% 100%;}
-    50% {background-position:100% 50%;}
-    75% {background-position:50% 0%;}
-    100% {background-position:0% 50%;}
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   /* Header */
   header {  
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.25);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -40,7 +38,6 @@
     backdrop-filter: blur(10px);
     z-index: 1000;
   }
-
   header h1 a { color: #fff; text-decoration: none; font-weight: bold; }
   nav { display: flex; gap: 1rem; transition: right 0.4s ease; }
   nav a { color: #fff; text-decoration: none; font-weight: 500; position: relative; }
@@ -79,37 +76,14 @@
   footer a { color: #ffea00; text-decoration: none; }
 
   /* Hamburger Button */
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    z-index: 1100;
-  }
-  .menu-toggle div {
-    width: 25px;
-    height: 3px;
-    background: #fff;
-    margin: 4px;
-    transition: all 0.3s;
-  }
+  .menu-toggle { display: none; flex-direction: column; cursor: pointer; z-index: 1100; }
+  .menu-toggle div { width: 25px; height: 3px; background: #fff; margin: 4px; transition: all 0.3s; }
   .menu-toggle.active div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
   .menu-toggle.active div:nth-child(2) { opacity: 0; }
   .menu-toggle.active div:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 
-  /* Mobile View */
   @media (max-width: 768px) {
-    nav {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 70%;
-      height: 100vh;
-      background: rgba(0,0,0,0.9);
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-    }
+    nav { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: rgba(0,0,0,0.9); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; }
     nav.active { right: 0; }
     .menu-toggle { display: flex; }
   }
@@ -117,15 +91,18 @@
 </head>
 <body>
 
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="your-music-file.mp3" type="audio/mp3">
+</audio>
+
 <header>
   <h1><a href="index.html">RA MUSIC ★</a></h1>
 
-  <!-- Menu Button -->
   <div class="menu-toggle" onclick="toggleMenu()">
     <div></div><div></div><div></div>
   </div>
 
-  <!-- Navigation -->
   <nav id="menu">
     <a href="about.html">About</a>
     <a href="#long-videos">Long Videos</a>
