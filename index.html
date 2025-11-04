@@ -3,10 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>RA MUSIC ★</title>
+
+<!-- ✅ SEO Meta Tags -->
+<title>RA MUSIC ★ | Official Website of RA Fahim</title>
+<meta name="description" content="RA MUSIC ★ - Enjoy latest Bangla and international remixes, lofi, and short videos by RA Fahim. Subscribe now on YouTube!" />
+<meta name="keywords" content="RA MUSIC, RA Fahim, rafahimn,natu,natasha, Remix, Lofi, Music, YouTube, Bangladesh, Songs" />
+<meta name="author" content="RA Fahim" />
+<link rel="icon" href="1755759759464.jpg" type="image/jpeg">
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-  body { background: linear-gradient(to right, #0061ff, #60efff); color: #fff; min-height: 100vh; }
+  body { background: linear-gradient(to right, #0061ff, #60efff); color: #fff; min-height: 100vh; overflow-x: hidden; }
 
   /* Header */
   header { 
@@ -22,7 +29,7 @@
   }
 
   header h1 a { color: #fff; text-decoration: none; font-weight: bold; }
-  nav { display: flex; gap: 1rem; }
+  nav { display: flex; gap: 1rem; transition: right 0.4s ease; }
   nav a { color: #fff; text-decoration: none; font-weight: 500; }
   nav a:hover { color: #ffea00; }
 
@@ -65,19 +72,40 @@
   /* Mobile View */
   @media (max-width: 768px) {
     nav {
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: rgba(0,0,0,0.85);
+      position: fixed;
+      top: 0;
+      right: -100%;
+      background: rgba(0,0,0,0.9);
       flex-direction: column;
-      width: 100%;
+      width: 70%;
+      height: 100%;
       text-align: center;
-      display: none;
+      justify-content: center;
+      transition: right 0.4s ease;
+      padding-top: 5rem;
     }
 
-    nav.active { display: flex; }
+    nav a {
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
 
-    .menu-toggle { display: flex; }
+    nav.active {
+      right: 0;
+    }
+
+    .menu-toggle { display: flex; z-index: 1100; }
+
+    /* Animation for menu icon */
+    .menu-toggle.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
   }
 </style>
 </head>
@@ -87,7 +115,7 @@
   <h1><a href="index.html">RA MUSIC ★</a></h1>
 
   <!-- Menu Button -->
-  <div class="menu-toggle" onclick="toggleMenu()">
+  <div class="menu-toggle" id="menu-btn" onclick="toggleMenu()">
     <div></div><div></div><div></div>
   </div>
 
@@ -131,7 +159,7 @@
     </div>
     <div class="video-card">
       <h3>Short 2</h3>
-      <p><a href="https://youtube.com/shorts/CCPAn6TliKs" target="_blank">She is looking so beautiful ❤‍🩹But she come not for me 😥</a></p>
+      <p><a href="https://youtube.com/shorts/CCPAn6TliKs" target="_blank">She is looking so beautiful ❤️‍🩹But she come not for me 😥</a></p>
     </div>
   </div>
 </section>
@@ -143,6 +171,7 @@
 <script>
 function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
+  document.getElementById("menu-btn").classList.toggle("active");
 }
 </script>
 
