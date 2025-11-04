@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -8,7 +6,6 @@
 <title>Gallery | RA MUSIC ★</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-
   body {
     background: linear-gradient(-45deg, #6a11cb, #2575fc, #21d4fd, #b721ff);
     background-size: 400% 400%;
@@ -23,6 +20,7 @@
     100% { background-position: 0% 50%; }
   }
 
+  /* Header */
   header {
     background: rgba(0,0,0,0.25);
     padding: 1rem 2rem;
@@ -33,24 +31,22 @@
     top: 0;
     backdrop-filter: blur(10px);
     z-index: 1000;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
-  header h1 a { color:#fff; text-decoration:none; font-weight:bold; }
-  nav { display:flex; gap:1rem; }
+  header h1 a { color:#fff; text-decoration:none; font-weight:bold; font-size:1.5rem; }
+
+  nav { display:flex; gap:1rem; flex-wrap: wrap; transition:right 0.4s ease; }
   nav a { color:#fff; text-decoration:none; font-weight:500; position:relative; }
   nav a::after { content:""; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:#ffea00; transition:0.3s; }
-  nav a:hover::after { width:100%; } nav a:hover { color:#ffea00; }
+  nav a:hover::after { width:100%; } 
+  nav a:hover { color:#ffea00; }
 
-  /* Hamburger */
   .menu-toggle { display:none; flex-direction:column; cursor:pointer; z-index:1100; }
   .menu-toggle div { width:25px; height:3px; background:#fff; margin:4px; transition:0.3s; }
   .menu-toggle.active div:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
   .menu-toggle.active div:nth-child(2) { opacity:0; }
   .menu-toggle.active div:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
-  @media (max-width:768px){
-    nav { position:fixed; top:0; right:-100%; width:70%; height:100vh; background:rgba(0,0,0,0.9); flex-direction:column; justify-content:center; align-items:center; gap:2rem; }
-    nav.active { right:0; }
-    .menu-toggle { display:flex; }
-  }
 
   section { padding:3rem 1rem; max-width:1200px; margin:auto; }
   section h2 { text-align:center; margin-bottom:2rem; }
@@ -72,7 +68,7 @@
     color:#ffea00;
   }
 
-  /* Fullscreen view */
+  /* Fullscreen Lightbox */
   .lightbox {
     display:none;
     position:fixed;
@@ -89,6 +85,16 @@
   .lightbox .caption { color:#ffea00; margin-top:1rem; text-align:center; font-size:1rem; }
   .lightbox .close { position:absolute; top:20px; right:30px; font-size:2rem; color:#fff; cursor:pointer; }
 
+  /* Mobile adjustments */
+  @media (max-width:768px){
+    nav { 
+      position:fixed; top:0; right:-100%; width:70%; height:100vh; 
+      background:rgba(0,0,0,0.9); flex-direction:column; justify-content:center; align-items:center; gap:1.5rem;
+    }
+    nav.active { right:0; }
+    nav a { font-size:0.9rem; padding:0.3rem 0; }
+    .menu-toggle { display:flex; }
+  }
 </style>
 </head>
 <body>
@@ -108,30 +114,29 @@
 <section>
   <h2>Gallery</h2>
   <div class="gallery-grid">
-    <div class="gallery-card" data-caption=" Our logo" data-date="2025-11-04">
+    <div class="gallery-card" data-caption="Our logo" data-date="2025-11-04">
       <img src="1755759759464.jpg" alt="Gallery Image 1">
       <div class="gallery-caption">2025-11-04 | Our logo</div>
     </div>
     <div class="gallery-card" data-caption="Our Banner" data-date="2025-11-04">
-      <img src="Red and White Clean Gardener YouTube Banner.png" alt="Gallery Image 2">
+      <img src="Red_and_White_Clean_Gardener_YouTube_Banner.png" alt="Gallery Image 2">
       <div class="gallery-caption">2025-11-04 | Our Banner</div>
     </div>
     <div class="gallery-card" data-caption="YT Analysis" data-date="2025-09-15">
       <img src="Screenshot_20251104_173042_YouTube.jpg" alt="Gallery Image 3">
-      <div class="gallery-caption">2025-09-15 | YT Analysis </div>
+      <div class="gallery-caption">2025-09-15 | YT Analysis</div>
     </div>
-    <div class="gallery-card" data-caption="Subscriber Milestone" data-date="2025-09-15 ">
-      <img src="1755759759464.jpgg" alt="Gallery Image 4">
-      <div class="gallery-caption">2025-09-15 | Subscriber Milestone </div>
+    <div class="gallery-card" data-caption="Subscriber Milestone" data-date="2025-09-15">
+      <img src="1755759759464.jpg" alt="Gallery Image 4">
+      <div class="gallery-caption">2025-09-15 | Subscriber Milestone</div>
     </div>
     <div class="gallery-card" data-caption="Views Milestone" data-date="2025-09-15">
-      <img src="_data_user_0_com.tubebuddy.tubebuddy_mobile_cache_FFSimpleDiskCache_03D670176236FC70685295A394A3ABF0.2592000.jpg" alt="Gallery Image 5">
-      <div class="gallery-caption">2025-09-15 | Views Milestone </div>
+      <img src="views_milestone.jpg" alt="Gallery Image 5">
+      <div class="gallery-caption">2025-09-15 | Views Milestone</div>
     </div>
   </div>
 </section>
 
-<!-- Fullscreen Lightbox -->
 <div class="lightbox" id="lightbox">
   <span class="close" onclick="closeLightbox()">&times;</span>
   <img id="lightbox-img" src="" alt="">
@@ -144,7 +149,7 @@ function toggleMenu() {
   document.querySelector(".menu-toggle").classList.toggle("active");
 }
 
-// Open lightbox
+// Lightbox functionality
 const galleryCards = document.querySelectorAll('.gallery-card');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
@@ -152,11 +157,8 @@ const lightboxCaption = document.getElementById('lightbox-caption');
 
 galleryCards.forEach(card => {
   card.addEventListener('click', () => {
-    const imgSrc = card.querySelector('img').src;
-    const caption = card.dataset.caption;
-    const date = card.dataset.date;
-    lightboxImg.src = imgSrc;
-    lightboxCaption.textContent = `${date} | ${caption}`;
+    lightboxImg.src = card.querySelector('img').src;
+    lightboxCaption.textContent = `${card.dataset.date} | ${card.dataset.caption}`;
     lightbox.style.display = 'flex';
   });
 });
