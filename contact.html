@@ -3,63 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Contact | RA MUSIC ★</title>
-<meta name="description" content="Get in touch with RA MUSIC ★ via EmailJS form or social media.">
-<meta name="author" content="RA Fahim">
-<link rel="icon" href="1755759759464.jpg" type="image/jpeg">
-
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
   body { background: linear-gradient(to right, #0061ff, #60efff); color:#fff; min-height:100vh; overflow-x:hidden; }
 
-  /* Header */
   header { background: rgba(0,0,0,0.2); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; backdrop-filter: blur(10px); z-index:1000; }
   header h1 a { color:#fff; text-decoration:none; font-weight:bold; }
-  nav { display:flex; gap:1rem; transition:right 0.4s ease; }
-  nav a { color:#fff; text-decoration:none; font-weight:500; }
+  nav a { color:#fff; margin:0 1rem; text-decoration:none; font-weight:500; }
   nav a:hover { color:#ffea00; }
 
-  /* Section */
   section { padding:3rem 1rem; max-width:800px; margin:auto; text-align:center; }
-  section h2 { font-size:2rem; margin-bottom:1rem; }
+  a.contact-link { color:#ffea00; text-decoration:none; }
+  a.contact-link:hover { text-decoration:underline; }
 
   /* Contact Form */
-  form { display:flex; flex-direction:column; gap:1rem; max-width:500px; margin:2rem auto; text-align:left; background:rgba(255,255,255,0.1); padding:2rem; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
-  label { font-weight:500; }
-  input, textarea { width:100%; padding:0.8rem; border:none; border-radius:8px; outline:none; font-size:1rem; }
+  form {
+    margin-top:2rem;
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    max-width: 500px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:left;
+  }
+  label { display:block; margin-bottom:0.4rem; font-weight:500; }
+  input, textarea {
+    width:100%;
+    padding:0.8rem;
+    border:none;
+    border-radius:8px;
+    outline:none;
+    font-size:1rem;
+    margin-bottom:1rem;
+  }
   textarea { resize:none; height:120px; }
-  button { background:#ffea00; color:#000; padding:0.8rem 1.5rem; border:none; border-radius:30px; font-weight:bold; cursor:pointer; transition:0.3s; }
+  button {
+    background:#ffea00;
+    color:#000;
+    padding:0.8rem 1.5rem;
+    border:none;
+    border-radius:30px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    display:block;
+    margin:auto;
+  }
   button:hover { transform:scale(1.05); background:#fff200; }
 
-  /* Footer */
   footer { background: rgba(0,0,0,0.3); text-align:center; padding:1.5rem; font-size:0.9rem; margin-top:2rem; }
   footer a { color:#ffea00; text-decoration:none; }
 
-  /* Hamburger */
-  .menu-toggle { display:none; flex-direction:column; cursor:pointer; }
-  .menu-toggle div { width:25px; height:3px; background:#fff; margin:4px; transition:all 0.3s; }
-
-  /* Mobile */
-  @media (max-width:768px){
-    nav { position:fixed; top:0; right:-100%; background:rgba(0,0,0,0.9); flex-direction:column; width:70%; height:100%; justify-content:center; text-align:center; transition:right 0.4s ease; }
-    nav a { padding:1rem; font-size:1.2rem; }
-    nav.active { right:0; }
-    .menu-toggle { display:flex; z-index:1100; }
-    .menu-toggle.active div:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-    .menu-toggle.active div:nth-child(2){opacity:0;}
-    .menu-toggle.active div:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-  }
+  #status { text-align:center; font-weight:bold; margin-top:10px; }
 </style>
 </head>
 <body>
 
 <header>
   <h1><a href="index.html">RA MUSIC ★</a></h1>
-  <div class="menu-toggle" id="menu-btn" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
-  </div>
-  <nav id="menu">
+  <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="instagram.html">Instagram</a>
@@ -67,9 +72,12 @@
 </header>
 
 <section>
-  <h2>📩 Contact Me</h2>
-  <p>Fill out the form below to send me a direct email!</p>
+  <h2>Contact Me</h2>
+  <p>Email: <a class="contact-link" href="mailto:rabbiahmedfahim44@gmail.com">rabbiahmedfahim44@gmail.com</a></p>
+  <p>Facebook: <a class="contact-link" href="https://www.facebook.com/profile.php?id=6155983603427" target="_blank">RA Music</a></p>
+  <p>Instagram: <a class="contact-link" href="https://www.instagram.com/rafahimn" target="_blank">RA Music ★</a></p>
 
+  <!-- ✅ EmailJS Form -->
   <form id="contact-form">
     <label for="name">Your Name</label>
     <input type="text" id="name" name="from_name" placeholder="Enter your name" required>
@@ -82,7 +90,8 @@
 
     <button type="submit">Send Message</button>
   </form>
-  <p id="status" style="font-weight:bold; margin-top:10px;"></p>
+
+  <p id="status"></p>
 </section>
 
 <footer>
@@ -94,14 +103,8 @@
 <script>
   // Initialize EmailJS
   (function(){
-    emailjs.init("YOUR_PUBLIC_KEY"); // 👉 এখানে তোমার EmailJS Public Key বসাও
+    emailjs.init("MV90CKf_ZoIgGoU9w");
   })();
-
-  // Toggle menu
-  function toggleMenu(){
-    document.getElementById("menu").classList.toggle("active");
-    document.getElementById("menu-btn").classList.toggle("active");
-  }
 
   // Handle form submit
   document.getElementById("contact-form").addEventListener("submit", function(e){
@@ -109,7 +112,7 @@
     const status = document.getElementById("status");
     status.innerText = "Sending... ⏳";
 
-    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+    emailjs.sendForm("rafahimn", "rafahimn", this)
     .then(() => {
       status.innerText = "✅ Message sent successfully!";
       this.reset();
