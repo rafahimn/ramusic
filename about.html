@@ -1,134 +1,133 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About | RA MUSIC ★</title>
-<meta name="description" content="Learn more about RA MUSIC ★ - Latest songs, remixes, and updates by RA Fahim.">
-<meta name="keywords" content="RA MUSIC, RA Fahim, about, remix, lofi, Bangladesh">
-<meta name="author" content="RA Fahim">
-
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-  body { background: linear-gradient(to right, #0061ff, #60efff); color:#fff; min-height:100vh; }
-
-  /* Header */
-  header { 
-    background: rgba(0,0,0,0.2);
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-  }
-  header h1 a { color:#fff; text-decoration:none; font-weight:bold; }
-
-  nav { display: flex; gap: 1rem; transition: right 0.4s ease; }
-  nav a { color:#fff; text-decoration:none; font-weight:500; position:relative; }
-  nav a::after {
-    content:"";
-    position:absolute;
-    bottom:-4px;
-    left:0;
-    width:0;
-    height:2px;
-    background:#ffea00;
-    transition:0.3s;
-  }
-  nav a:hover::after { width:100%; }
-  nav a:hover { color:#ffea00; }
-
-  /* Hamburger Button */
-  .menu-toggle {
-    display:none;
-    flex-direction:column;
-    cursor:pointer;
-    z-index:1100;
-  }
-  .menu-toggle div {
-    width:25px;
-    height:3px;
-    background:#fff;
-    margin:4px;
-    transition:all 0.3s;
-  }
-  .menu-toggle.active div:nth-child(1) {
-    transform:rotate(45deg) translate(5px,5px);
-  }
-  .menu-toggle.active div:nth-child(2) {
-    opacity:0;
-  }
-  .menu-toggle.active div:nth-child(3) {
-    transform:rotate(-45deg) translate(6px,-6px);
-  }
-
-  /* Mobile View */
-  @media (max-width:768px) {
-    nav {
-      position:fixed;
-      top:0;
-      right:-100%;
-      width:70%;
-      height:100vh;
-      background:rgba(0,0,0,0.9);
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      gap:2rem;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | RA MUSIC ★</title>
+  <style>
+    /* ===== Body & Dynamic Background ===== */
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      background: linear-gradient(-45deg, #0061ff, #60efff, #00ff80, #ffea00);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
     }
-    nav.active { right:0; }
-    .menu-toggle { display:flex; }
-  }
 
-  /* Section */
-  section { padding:3rem 1rem; max-width:800px; margin:auto; text-align:center; }
-  section h2 { font-size:2rem; margin-bottom:1rem; }
-  section p { font-size:1.1rem; line-height:1.6; }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-  /* Footer */
-  footer { background:rgba(0,0,0,0.3); text-align:center; padding:1.5rem; font-size:0.9rem; margin-top:2rem; }
-  footer a { color:#ffea00; text-decoration:none; }
-</style>
+    /* ===== Header ===== */
+    header {
+      background: rgba(0,0,0,0.2);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    header h1 a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ffea00;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after { width: 100%; }
+    nav a:hover { color: #ffea00; }
+
+    /* ===== Section ===== */
+    section {
+      padding: 3rem 1rem;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    section h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    section p {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    a {
+      color: #ffea00;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: #ffea00;
+    }
+
+    /* ===== Responsive ===== */
+    @media(max-width: 768px) {
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+  </style>
 </head>
 <body>
 
-<header>
-  <h1><a href="index.html">RA MUSIC ★</a></h1>
+  <header>
+    <h1><a href="index.html">RA MUSIC ★</a></h1>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="index.html#projects">Videos</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
 
-  <!-- Menu Button -->
-  <div class="menu-toggle" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
-  </div>
-
-  <!-- Navigation -->
-  <nav id="menu">
-    <a href="index.html">Home</a>
-    <a href="contact.html">Contact</a>
-    <a href="instagram.html">Instagram</a>
-  </nav>
-</header>
-
-<section>
-  <h2>About RA MUSIC ★</h2>
-  <p>
-    Welcome to <strong>RA MUSIC ★</strong> — your ultimate destination for the latest songs, remixes, and creative musical content.  
-    সবার প্রতি রইলো অসংখ্য ভালোবাসা 💙 চ্যানেলটি সাবস্ক্রাইব করে আমাদের পাশে থাকবেন। ♡  
-  </p>
-</section>
-
-<footer>
-  © 2025 | Developed by <a href="https://www.facebook.com/rafahimn" target="_blank">RA Fahim</a>
-</footer>
-
-<script>
-function toggleMenu() {
-  document.getElementById("menu").classList.toggle("active");
-  document.querySelector(".menu-toggle").classList.toggle("active");
-}
-</script>
+  <section>
+    <h2>About My Channel</h2>
+    <p>
+      Hello Everyone! Welcome to <b>RA MUSIC ★</b>.<br><br>
+      ✨ Here you will find:<br>
+      • Songs Update News<br>
+      • Coming Soon Songs<br><br>
+      ☆ সবার প্রতি রইলো অসংখ্য ভালোবাসা। চ্যানেলটি সাবস্ক্রাইব করে আমাদের পাশেই থাকবেন। ♡<br><br>
+      Contact:<br>
+      Instagram: <a href="https://www.instagram.com/rafahimn" target="_blank" rel="noopener noreferrer">@rafahimn</a><br>
+      TikTok: <a href="https://www.tiktok.com/@rafahimn" target="_blank" rel="noopener noreferrer">@rafahimn</a><br>
+      Facebook: <a href="https://www.facebook.com/rafahim" target="_blank" rel="noopener noreferrer">@rafahim</a><br>
+      Gmail: <a href="mailto:rabbiahmedfahim44@gmail.com">rabbiahmedfahim44@gmail.com</a>
+    </p>
+  </section>
 
 </body>
 </html>
