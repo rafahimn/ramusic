@@ -11,25 +11,25 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
-  /* Dynamic Rainbow Background with subtle green adjustment */
+  /* ===== Dynamic Rainbow Background (Green Removed, Smooth Animation) ===== */
   body {
-    background: linear-gradient(270deg, #ff6ec4, #7873f5, #00e673, #00ffff, #ff6ec4);
+    background: linear-gradient(270deg, #ff6ec4, #7873f5, #00ffff, #ffea00, #ff6ec4);
     background-size: 1000% 1000%;
-    animation: gradientBG 30s ease infinite;
+    animation: gradientBG 25s ease infinite;
     color: #fff;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
   @keyframes gradientBG {
-    0% { background-position:0% 50%; }
-    50% { background-position:100% 50%; }
-    100% { background-position:0% 50%; }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
-  /* Header */
+  /* ===== Header ===== */
   header {  
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.25);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -55,7 +55,7 @@
   nav a:hover::after { width: 100%; }
   nav a:hover { color: #ffea00; }
 
-  /* Hamburger Button */
+  /* ===== Hamburger ===== */
   .menu-toggle {
     display: none;
     flex-direction: column;
@@ -90,10 +90,19 @@
     .menu-toggle { display: flex; }
   }
 
-  /* Hero */
-  .hero { text-align: center; padding: 4rem 1rem 3rem; }
+  /* ===== Hero Section ===== */
+  .hero {
+    text-align: center;
+    padding: 4rem 1rem 3rem;
+  }
   .hero h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-  .hero img { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 1rem; border: 3px solid #ffea00; }
+  .hero img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid #ffea00;
+  }
   .hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto 1.5rem; line-height: 1.6; }
   .btn {
     background: #ffea00;
@@ -104,19 +113,49 @@
     font-weight: bold;
     transition: transform 0.3s, box-shadow 0.3s;
   }
-  .btn:hover { transform: scale(1.1); box-shadow: 0 0 10px #ffea00; }
+  .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px #ffea00;
+  }
 
-  /* Videos */
+  /* ===== Video Section ===== */
   section { padding: 3rem 1rem; max-width: 1000px; margin: auto; }
   .video-section { margin-bottom: 3rem; }
   .video-section h2 { text-align: center; margin-bottom: 1.5rem; }
-  .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-  .video-card { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 1rem; text-align: center; transition: 0.3s; }
-  .video-card:hover { background: rgba(255,255,255,0.2); transform: translateY(-5px); }
-  .video-card a { color: #00ffff; text-decoration: none; } /* Matches background nicely */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  .video-card {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 1rem;
+    text-align: center;
+    transition: 0.3s;
+  }
+  .video-card:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-5px);
+  }
+  .video-card a {
+    color: #00e5ff; /* Brighter Cyan for clarity */
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .video-card a:hover {
+    color: #ffea00;
+    text-shadow: 0 0 6px #fff;
+  }
 
-  /* Footer */
-  footer { background: rgba(0,0,0,0.3); text-align: center; padding: 1.5rem; font-size: 0.9rem; margin-top: 2rem; }
+  /* ===== Footer ===== */
+  footer {
+    background: rgba(0,0,0,0.35);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+  }
   footer a { color: #ffea00; text-decoration: none; }
 
 </style>
