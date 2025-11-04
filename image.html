@@ -4,11 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gallery | RA MUSIC ★</title>
-
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 
-  /* Dynamic Background */
   body {
     background: linear-gradient(-45deg, #6a11cb, #2575fc, #21d4fd, #b721ff);
     background-size: 400% 400%;
@@ -17,14 +15,12 @@
     color: #fff;
     overflow-x: hidden;
   }
-
   @keyframes softGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
 
-  /* Header */
   header {
     background: rgba(0,0,0,0.25);
     padding: 1rem 2rem;
@@ -37,11 +33,10 @@
     z-index: 1000;
   }
   header h1 a { color:#fff; text-decoration:none; font-weight:bold; }
-  nav { display:flex; gap:1rem; transition:right 0.4s ease; }
+  nav { display:flex; gap:1rem; }
   nav a { color:#fff; text-decoration:none; font-weight:500; position:relative; }
   nav a::after { content:""; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:#ffea00; transition:0.3s; }
-  nav a:hover::after { width:100%; }
-  nav a:hover { color:#ffea00; }
+  nav a:hover::after { width:100%; } nav a:hover { color:#ffea00; }
 
   /* Hamburger */
   .menu-toggle { display:none; flex-direction:column; cursor:pointer; z-index:1100; }
@@ -55,19 +50,42 @@
     .menu-toggle { display:flex; }
   }
 
-  /* Gallery Section */
   section { padding:3rem 1rem; max-width:1200px; margin:auto; }
-  section h2 { text-align:center; margin-bottom:2rem; font-size:2rem; }
+  section h2 { text-align:center; margin-bottom:2rem; }
+
   .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; }
-  .gallery-card { border-radius:15px; overflow:hidden; transition:0.3s; background: rgba(255,255,255,0.05); }
+  .gallery-card { border-radius:15px; overflow:hidden; cursor:pointer; position:relative; transition:0.3s; }
   .gallery-card img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.3s; }
   .gallery-card:hover img { transform: scale(1.05); }
-  .upload-info { margin-top:0.5rem; font-size:0.9rem; color:rgba(255,255,255,0.8); text-align:center; }
-  .upload-info .caption { font-style:italic; color: rgba(255,255,255,0.9); }
 
-  /* Footer */
-  footer { text-align:center; padding:1.5rem; font-size:0.9rem; margin-top:2rem; background:rgba(0,0,0,0.3);}
-  footer a { color:#ffea00; text-decoration:none; }
+  .gallery-caption {
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background: rgba(0,0,0,0.5);
+    padding: 0.5rem;
+    font-size:0.85rem;
+    text-align:center;
+    color:#ffea00;
+  }
+
+  /* Fullscreen view */
+  .lightbox {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.95);
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+    flex-direction:column;
+    padding:1rem;
+  }
+  .lightbox img { max-width:90%; max-height:70%; border-radius:10px; }
+  .lightbox .caption { color:#ffea00; margin-top:1rem; text-align:center; font-size:1rem; }
+  .lightbox .close { position:absolute; top:20px; right:30px; font-size:2rem; color:#fff; cursor:pointer; }
 
 </style>
 </head>
@@ -75,11 +93,7 @@
 
 <header>
   <h1><a href="index.html">RA MUSIC ★</a></h1>
-
-  <div class="menu-toggle" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
-  </div>
-
+  <div class="menu-toggle" onclick="toggleMenu()"><div></div><div></div><div></div></div>
   <nav id="menu">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -92,52 +106,53 @@
 <section>
   <h2>Gallery</h2>
   <div class="gallery-grid">
-    <div class="gallery-card">
-      <img src="1755759759464.jpg" alt="Gallery Image 1">
-      <p class="upload-info">
-        <span class="date">Uploaded: 2025-11-01</span><br>
-        <span class="caption">Our logo</span>
-      </p>
+    <div class="gallery-card" data-caption="Beautiful Sunset" data-date="2025-11-04">
+      <img src="images/img1.jpg" alt="Gallery Image 1">
+      <div class="gallery-caption">2025-11-04 | Beautiful Sunset</div>
     </div>
-    <div class="gallery-card">
+    <div class="gallery-card" data-caption="Relaxing Beach" data-date="2025-10-20">
       <img src="images/img2.jpg" alt="Gallery Image 2">
-      <p class="upload-info">
-        <span class="date">Uploaded: 2025-10-28</span><br>
-        <span class="caption">Relaxing Lofi Beats 🎶</span>
-      </p>
+      <div class="gallery-caption">2025-10-20 | Relaxing Beach</div>
     </div>
-    <div class="gallery-card">
+    <div class="gallery-card" data-caption="Night City Lights" data-date="2025-09-15">
       <img src="images/img3.jpg" alt="Gallery Image 3">
-      <p class="upload-info">
-        <span class="date">Uploaded: 2025-10-25</span><br>
-        <span class="caption">Chill Vibes 🌌</span>
-      </p>
-    </div>
-    <div class="gallery-card">
-      <img src="images/img4.jpg" alt="Gallery Image 4">
-      <p class="upload-info">
-        <span class="date">Uploaded: 2025-10-20</span><br>
-        <span class="caption">Smooth Jazz 🎷</span>
-      </p>
-    </div>
-    <div class="gallery-card">
-      <img src="images/img5.jpg" alt="Gallery Image 5">
-      <p class="upload-info">
-        <span class="date">Uploaded: 2025-10-15</span><br>
-        <span class="caption">Night Chill ✨</span>
-      </p>
+      <div class="gallery-caption">2025-09-15 | Night City Lights</div>
     </div>
   </div>
 </section>
 
-<footer>
-  © 2025 | Developed by <a href="https://www.facebook.com/rafahimn" target="_blank">RA Fahim</a>
-</footer>
+<!-- Fullscreen Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+  <div class="caption" id="lightbox-caption"></div>
+</div>
 
 <script>
 function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
   document.querySelector(".menu-toggle").classList.toggle("active");
+}
+
+// Open lightbox
+const galleryCards = document.querySelectorAll('.gallery-card');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+
+galleryCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const imgSrc = card.querySelector('img').src;
+    const caption = card.dataset.caption;
+    const date = card.dataset.date;
+    lightboxImg.src = imgSrc;
+    lightboxCaption.textContent = `${date} | ${caption}`;
+    lightbox.style.display = 'flex';
+  });
+});
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
 }
 </script>
 
