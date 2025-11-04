@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RA MUSIC ★</title>
 
 <style>
@@ -24,7 +23,6 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* Header */
   header {  
     background: rgba(0,0,0,0.25);
     padding: 1rem 2rem;
@@ -47,6 +45,7 @@
     flex:1;
     display:flex;
     justify-content:flex-end;
+    position:relative;
   }
 
   .search-container input {
@@ -70,24 +69,7 @@
   .menu-toggle.active div:nth-child(2) { opacity:0; }
   .menu-toggle.active div:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
 
-  @media(max-width:768px){
-    nav {
-      position:fixed;
-      top:0; right:-100%;
-      width:70%; height:100vh;
-      background:rgba(0,0,0,0.9);
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      gap:2rem;
-    }
-    nav.active { right:0; }
-    .menu-toggle { display:flex; }
-    .search-container { width:100%; justify-content:center; margin-top:0.5rem; }
-    .search-container input { max-width:90%; }
-  }
-
-  /* Hero & Videos (same as before) */
+  /* Hero & Videos */
   .hero { text-align:center; padding:4rem 1rem 3rem; }
   .hero h2 { font-size:2.5rem; margin-bottom:0.5rem; }
   .hero img { width:120px; height:120px; border-radius:50%; margin-bottom:1rem; border:3px solid #ffea00; }
@@ -105,15 +87,42 @@
   .video-card a:hover { color:#ffea00; text-shadow:0 0 10px #ffea00; }
 
   /* Search results dropdown */
-  #searchResults { position:absolute; background:rgba(0,0,0,0.9); margin-top:0.3rem; border-radius:10px; max-height:250px; overflow-y:auto; width:250px; z-index:1000; }
-  #searchResults div { padding:0.5rem 1rem; border-bottom:1px solid rgba(255,255,255,0.1); }
-  #searchResults div:last-child { border-bottom:none; }
+  #searchResults {
+    position:absolute;
+    top:40px;
+    right:0;
+    background: rgba(0,0,0,0.6);
+    border-radius:10px;
+    padding:0.2rem 0;
+    display:none;
+    flex-direction: column;
+    width:250px;
+    z-index:1000;
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  #searchResults div {
+    padding:0.4rem 0.8rem;
+    border-bottom:none;
+    transition: background 0.2s;
+  }
+  #searchResults div:hover { background: rgba(255,255,255,0.1); }
   #searchResults a { color:#00ffe0; text-decoration:none; }
   #searchResults a:hover { color:#ffea00; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   footer { background:rgba(0,0,0,0.3); text-align:center; padding:1.5rem; font-size:0.9rem; margin-top:2rem; }
   footer a { color:#ffea00; text-decoration:none; }
 
+  /* Mobile adjustments */
+  @media(max-width:768px){
+    .search-container input { max-width:180px; font-size:0.9rem; }
+    #searchResults { width:180px; top:35px; }
+  }
 </style>
 </head>
 <body>
@@ -126,9 +135,7 @@
     <div id="searchResults"></div>
   </div>
 
-  <div class="menu-toggle" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
-  </div>
+  <div class="menu-toggle" onclick="toggleMenu()"><div></div><div></div><div></div></div>
 
   <nav id="menu">
     <a href="about.html">About</a>
@@ -183,7 +190,7 @@ function toggleMenu() {
   document.querySelector(".menu-toggle").classList.toggle("active");
 }
 
-// Search Data
+// Search data
 const data = [
   { type: 'Video', title: 'Ayaz Erdoğan - Hep Mi Ben? (Remix)', link: 'https://youtu.be/tr-FkYSZ3II?si=xu0GyUjXTZJmGwFL' },
   { type: 'Video', title: 'Mann Mera - Lofi (Slowed + Reverb)', link: 'https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991' },
@@ -200,11 +207,15 @@ const resultsDiv = document.getElementById('searchResults');
 input.addEventListener('input', function() {
   const query = this.value.toLowerCase();
   resultsDiv.innerHTML = '';
-  if(query.length === 0) return;
+  if(query.length === 0) {
+    resultsDiv.style.display = 'none';
+    return;
+  }
 
   const filtered = data.filter(item => item.title.toLowerCase().includes(query));
   if(filtered.length === 0) {
     resultsDiv.innerHTML = '<div style="color:#ffea00;">No results found</div>';
+    resultsDiv.style.display = 'flex';
     return;
   }
 
@@ -213,6 +224,8 @@ input.addEventListener('input', function() {
     div.innerHTML = `<strong>${item.type}:</strong> <a href="${item.link}" target="_blank">${item.title}</a>`;
     resultsDiv.appendChild(div);
   });
+
+  resultsDiv.style.display = 'flex';
 });
 </script>
 
