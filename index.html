@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -85,6 +84,25 @@
   .menu-toggle.active div:nth-child(2) { opacity:0; }
   .menu-toggle.active div:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
 
+  /* Newsfeed */
+  .newsfeed {
+    width: 100%;
+    background: rgba(0,0,0,0.35);
+    padding: 8px 0;
+    margin-top: 5px;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  .newsfeed a {
+    color: #ffea00;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .newsfeed a:hover {
+    color: #00ffe0;
+  }
+
   .hero { text-align:center; padding:4rem 1rem 3rem; }
   .hero h2 { font-size:2.5rem; margin-bottom:0.5rem; }
   .hero img { width:120px; height:120px; border-radius:50%; margin-bottom:1rem; border:3px solid #ffea00; }
@@ -104,7 +122,6 @@
   footer { background:rgba(0,0,0,0.3); text-align:center; padding:1.5rem; font-size:0.9rem; margin-top:2rem; }
   footer a { color:#ffea00; text-decoration:none; }
 
-  /* Mobile adjustments */
   @media(max-width:768px){
     nav {
       position:fixed;
@@ -147,6 +164,14 @@
     <a href="#" onclick="shareSite(); toggleMenu();">Share</a>
   </nav>
 </header>
+
+<!-- ⭐ NEWSFEED START -->
+<div class="newsfeed">
+  <marquee behavior="scroll" direction="left" scrollamount="6" id="newsTicker">
+    Loading latest updates...
+  </marquee>
+</div>
+<!-- ⭐ NEWSFEED END -->
 
 <section class="hero">
   <img src="1755759759464.jpg" alt="RA MUSIC Logo">
@@ -200,12 +225,10 @@ function shareSite() {
       title: 'RA MUSIC ★',
       text: 'Check out RA MUSIC ★ website!',
       url: window.location.href
-    }).then(() => console.log('Thanks for sharing!'))
-      .catch(console.error);
+    });
   } else {
     navigator.clipboard.writeText(window.location.href)
-      .then(() => alert('Link copied to clipboard!'))
-      .catch(() => alert('Copy failed. Please copy manually.'));
+      .then(() => alert('Link copied!'));
   }
 }
 
@@ -215,13 +238,6 @@ const data = [
   { type: 'Video', title: 'Mann Mera - Lofi (Slowed + Reverb)', link: 'https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991' },
   { type: 'Short', title: 'প্রতিটি মেয়েই নিষ্ঠুর হওয়ার অসীম ক্ষমতা নিয়ে জন্মায় 😅🖤🥀', link: 'https://www.youtube.com/shorts/Rr9HxX6MxsQ' },
   { type: 'Short', title: 'She is looking so beautiful ❤️‍🩹But she come not for me 😥', link: 'https://youtube.com/shorts/CCPAn6TliKs' },
-  { type: 'Gallery', title: 'My first remix 🎧🔥', link: 'image.html#img1' },
-  { type: 'Gallery', title: 'Relaxing Lofi Beats 🎶', link: 'image.html#img2' },
-  { type: 'Gallery', title: '2025-11-04 | Our logo', link: 'image.html#img1' },
-  { type: 'Gallery', title: '2025-11-04 | Our Banner', link: 'image.html#img2' },
-  { type: 'Gallery', title: '2025-09-15 | YT Analysis', link: 'image.html#img3' },
-  { type: 'Gallery', title: '2025-09-15 | Subscriber Milestone', link: 'image.html#img4' },
-  { type: 'Gallery', title: '2025-09-15 | Views Milestone', link: 'image.html#img5' },
   { type: 'Facebook', title: 'RA Fahim (Facebook)', link: 'https://www.facebook.com/rafahimn' }
 ];
 
@@ -245,6 +261,18 @@ input.addEventListener('input', function() {
     resultsDiv.appendChild(div);
   });
 });
+
+// ⭐ Newsfeed dynamic content
+const newsItems = [
+  { text: "New Video: Ayaz Erdoğan - Hep Mi Ben? (Remix)", link: "https://youtu.be/tr-FkYSZ3II" },
+  { text: "New Short Released! 😍🔥", link: "https://www.youtube.com/shorts/Rr9HxX6MxsQ" },
+  { text: "New Lofi Remix Coming Soon 🎧✨", link: "#" }
+];
+
+let ticker = document.getElementById("newsTicker");
+ticker.innerHTML = newsItems
+  .map(item => `🔔 <a href="${item.link}" target="_blank">${item.text}</a>`)
+  .join(" | ");
 </script>
 
 </body>
