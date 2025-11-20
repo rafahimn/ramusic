@@ -84,7 +84,7 @@
   .menu-toggle.active div:nth-child(2) { opacity:0; }
   .menu-toggle.active div:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
 
-  /* Newsfeed */
+  /* NEWSFEED */
   .newsfeed {
     width: 100%;
     background: rgba(0,0,0,0.35);
@@ -168,7 +168,7 @@
 <!-- ⭐ NEWSFEED START -->
 <div class="newsfeed">
   <marquee behavior="scroll" direction="left" scrollamount="6" id="newsTicker">
-    Loading latest updates...
+    Loading Latest Updates...
   </marquee>
 </div>
 <!-- ⭐ NEWSFEED END -->
@@ -177,7 +177,7 @@
   <img src="1755759759464.jpg" alt="RA MUSIC Logo">
   <h2>Welcome to RA MUSIC ★</h2>
   <p>Subscribe to our channel and enjoy the latest songs, remixes & shorts!</p>
-  <a class="btn" href="https://youtube.com/@rafahimn?si=sS8mFOkLSWNocQqb" target="_blank">Visit Our YouTube Channel</a>
+  <a class="btn" href="https://youtube.com/@rafahimn" target="_blank">Visit Our YouTube Channel</a>
 </section>
 
 <section id="long-videos" class="video-section">
@@ -185,11 +185,11 @@
   <div class="video-grid">
     <div class="video-card">
       <h3>Video 1</h3>
-      <p><a href="https://youtu.be/tr-FkYSZ3II?si=xu0GyUjXTZJmGwFL" target="_blank">Ayaz Erdoğan - Hep Mi Ben? (Remix)</a></p>
+      <p><a href="https://youtu.be/tr-FkYSZ3II" target="_blank">Ayaz Erdoğan - Hep Mi Ben? (Remix)</a></p>
     </div>
     <div class="video-card">
       <h3>Video 2</h3>
-      <p><a href="https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991" target="_blank">Mann Mera - Lofi (Slowed + Reverb)</a></p>
+      <p><a href="https://youtu.be/j3juWkCQztw" target="_blank">Mann Mera - Lofi (Slowed + Reverb)</a></p>
     </div>
   </div>
 </section>
@@ -203,7 +203,7 @@
     </div>
     <div class="video-card">
       <h3>Short 2</h3>
-      <p><a href="https://youtube.com/shorts/CCPAn6TliKs" target="_blank">She is looking so beautiful ❤️‍🩹But she come not for me 😥</a></p>
+      <p><a href="https://youtube.com/shorts/CCPAn6TliKs" target="_blank">She is looking so beautiful ❤️‍🩹 But she come not for me 😥</a></p>
     </div>
   </div>
 </section>
@@ -234,10 +234,10 @@ function shareSite() {
 
 // Search Data
 const data = [
-  { type: 'Video', title: 'Ayaz Erdoğan - Hep Mi Ben? (Remix)', link: 'https://youtu.be/tr-FkYSZ3II?si=xu0GyUjXTZJmGwFL' },
-  { type: 'Video', title: 'Mann Mera - Lofi (Slowed + Reverb)', link: 'https://youtu.be/j3juWkCQztw?si=dvaw8QGTNfXj3991' },
-  { type: 'Short', title: 'প্রতিটি মেয়েই নিষ্ঠুর হওয়ার অসীম ক্ষমতা নিয়ে জন্মায় 😅🖤🥀', link: 'https://www.youtube.com/shorts/Rr9HxX6MxsQ' },
-  { type: 'Short', title: 'She is looking so beautiful ❤️‍🩹But she come not for me 😥', link: 'https://youtube.com/shorts/CCPAn6TliKs' },
+  { type: 'Video', title: 'Ayaz Erdoğan - Hep Mi Ben? (Remix)', link: 'https://youtu.be/tr-FkYSZ3II' },
+  { type: 'Video', title: 'Mann Mera - Lofi (Slowed + Reverb)', link: 'https://youtu.be/j3juWkCQztw' },
+  { type: 'Short', title: 'প্রতিটি মেয়েই নিষ্ঠুর হওয়ার অসীম ক্ষমতা নিয়ে জন্মায়', link: 'https://www.youtube.com/shorts/Rr9HxX6MxsQ' },
+  { type: 'Short', title: 'She is looking so beautiful', link: 'https://youtube.com/shorts/CCPAn6TliKs' },
   { type: 'Facebook', title: 'RA Fahim (Facebook)', link: 'https://www.facebook.com/rafahimn' }
 ];
 
@@ -262,17 +262,33 @@ input.addEventListener('input', function() {
   });
 });
 
-// ⭐ Newsfeed dynamic content
-const newsItems = [
-  { text: "New Video: Ayaz Erdoğan - Hep Mi Ben? (Remix)", link: "https://youtu.be/tr-FkYSZ3II" },
-  { text: "New Short Released! 😍🔥", link: "https://www.youtube.com/shorts/Rr9HxX6MxsQ" },
-  { text: "New Lofi Remix Coming Soon 🎧✨", link: "#" }
-];
+// ⭐ Auto Newsfeed from YouTube RSS
+async function loadRSS() {
+  const rss = "https://www.youtube.com/feeds/videos.xml?channel_id=UCNYyG8tt8tWAwVnzwfdyFHQ";
 
-let ticker = document.getElementById("newsTicker");
-ticker.innerHTML = newsItems
-  .map(item => `🔔 <a href="${item.link}" target="_blank">${item.text}</a>`)
-  .join(" | ");
+  try {
+    const res = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(rss));
+    const data = await res.json();
+
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(data.contents, "text/xml");
+
+    let items = [...xml.querySelectorAll("entry")].slice(0, 5);
+
+    const list = items.map(v => {
+      const title = v.querySelector("title").textContent;
+      const link = v.querySelector("link").getAttribute("href");
+      return `🔔 <a href="${link}" target="_blank">${title}</a>`;
+    }).join(" | ");
+
+    document.getElementById("newsTicker").innerHTML = list;
+
+  } catch (e) {
+    document.getElementById("newsTicker").innerHTML = "⚠ Unable to load updates";
+  }
+}
+
+loadRSS();
 </script>
 
 </body>
