@@ -273,7 +273,7 @@ async function loadRSS() {
     const parser = new DOMParser();
     const xml = parser.parseFromString(data.contents, "text/xml");
 
-    let items = [...xml.querySelectorAll("entry")].slice(0, 5);
+    let items = [...xml.querySelectorAll("entry")].slice(0, 2);
 
     const list = items.map(v => {
       const title = v.querySelector("title").textContent;
